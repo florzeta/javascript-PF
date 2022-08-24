@@ -1,7 +1,7 @@
-const botonVaciar = document.getElementById('vaciar-carrito')
 
 const contadorCarrito = document.getElementById('contadorCarrito')
 
+const contenedorCarrito = document.getElementById("carritoContenedor");
 //totales de carrito
 const cantidad = document.getElementById('cantidad')
 const precioTotal = document.getElementById('precioTotal')
@@ -22,6 +22,21 @@ class Producto {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('carrito')){
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        imprimirCarrito()
+    }
+})
+
+
+const vaciarCarrito = document.getElementById('vaciarCarrito')
+//boton vaciar carrito
+vaciarCarrito.addEventListener('click', () => {
+    carrito.length = 0
+    imprimirCarrito()
+})
+
 const cargarProductos = async () => {
     let listaProductos = [];
     try {
@@ -38,6 +53,8 @@ const cargarProductos = async () => {
     }
     return listaProductos;
 }
+
+
 
 const imprimirProductos = async (listaP) => {
     const contenedorProductos = document.getElementById('producto-contenedor');
@@ -95,7 +112,7 @@ const agregarAlCarrito = (prodId) => {
         carrito.push(item);// se carga al carrito
     }
     
-    imprimirCarrito(carrito); //actualiza el carrito
+    imprimirCarrito(); //actualiza el carrito
     console.log(carrito);
 }
 
@@ -106,26 +123,33 @@ const eliminarDelCarrito = (prodId) => {
 
     carrito.splice(indice, 1) //Le pasamos el indice de mi elemento ITEM y borramos 
     // un elemento 
-    actualizarCarrito() //LLAMAMOS A LA FUNCION QUE CREAMOS EN EL TERCER PASO. CADA VEZ Q SE 
+    imprimirCarrito() //LLAMAMOS A LA FUNCION QUE CREAMOS EN EL TERCER PASO. CADA VEZ Q SE 
     //MODIFICA EL CARRITO
     console.log(carrito)
+    
 }
-const imprimirCarrito = (c) => {
+
+
+
+const imprimirCarrito = () => {
     // carrito en modal
-    const contenedorCarrito = document.getElementById("carritoContenedor");
-    contenedorCarrito.innerHTML = "";
-        c.forEach((producto) => {
+    contenedorCarrito.innerHTML = ""
+        carrito.forEach((producto) => {
             const div = document.createElement('div')
             div.className = ('productoEnCarrito')
             div.innerHTML = `
               <p>${producto.nombre}</p>
               <p>Precio: $ ${producto.precio}</p>
-              <p>Cantidad:<span id="cantidad">${producto.cantidad}</span></p>
+              <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
               <button onclick="eliminarDelCarrito(${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
             `
-            contenedorCarrito.append(div)
+            contenedorCarrito.appendChild(div)
+
+            localStorage.setItem('carrito', JSON.stringify(carrito))
         })
     }
+
+
 
 
 // funcion global de procesos asincronos 
@@ -141,7 +165,7 @@ const global = async () => {
 global();
 // cargarEventosEnBotones()
 
-export { eliminarDelCarrito };
+// export {eliminarDelCarrito};
 
 
 
