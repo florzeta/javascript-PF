@@ -11,6 +11,8 @@ const modalCarrito= document.querySelector('.modal-container-carrito');
 const cerrarCarrito = document.querySelector('.closeCarrito');
 
 
+
+
 openModal.addEventListener('click', (e)=>{
     e.preventDefault();
     modal.classList.add('modal-show');
@@ -30,3 +32,4 @@ cerrarCarrito.addEventListener('click', (e)=>{
     e.preventDefault();
     modalCarrito.classList.remove('modal-carrito-show');
 });
+
