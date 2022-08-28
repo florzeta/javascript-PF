@@ -2,6 +2,8 @@
 const contadorCarrito = document.getElementById('contadorCarrito')
 
 const contenedorCarrito = document.getElementById("carritoContenedor");
+
+
 //totales de carrito
 const cantidad = document.getElementById('cantidad')
 const precioTotal = document.getElementById('precioTotal')
@@ -110,6 +112,13 @@ const agregarAlCarrito = (prodId) => {
             })
         }
         carrito.push(item);// se carga al carrito
+        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Se agrego el producto al carrito',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
     }
     
     imprimirCarrito(); //actualiza el carrito
@@ -119,16 +128,23 @@ const agregarAlCarrito = (prodId) => {
 const eliminarDelCarrito = (prodId) => {
     const item = carrito.find((prod) => prod.id === prodId)
 
-    const indice = carrito.indexOf(item) //Busca el elemento q yo le pase y nos devuelve su indice.
+    const indice = carrito.indexOf(item) //Busca el elemento y da el indice
 
-    carrito.splice(indice, 1) //Le pasamos el indice de mi elemento ITEM y borramos 
-    // un elemento 
-    imprimirCarrito() //LLAMAMOS A LA FUNCION QUE CREAMOS EN EL TERCER PASO. CADA VEZ Q SE 
-    //MODIFICA EL CARRITO
+    carrito.splice(indice, 1) //a traves del indice se elimina el elemento
+    imprimirCarrito() 
     console.log(carrito)
     
 }
-
+//chequeo de carrito de usuario
+function checkUserCarrito (){
+    const userCarrito = (sessionStorage.getItem(`userCarrito`));
+    let carritotemp = JSON.parse(localStorage.getItem(userCarrito))
+    if (carritotemp){
+        carrito.push(...carritotemp)
+    }
+    console.log(carrito);
+    imprimirCarrito();
+}
 
 
 const imprimirCarrito = () => {
@@ -147,6 +163,14 @@ const imprimirCarrito = () => {
 
             localStorage.setItem('carrito', JSON.stringify(carrito))
         })
+        
+        //mod contador del carrito
+        contadorCarrito.innerText = carrito.length;
+        console.log(carrito)
+        //mod precioTotal
+        precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
+        //se almacena el carrito y se usa como clave el correo del usuario para recuperar los prod seleccionados
+        localStorage.setItem(sessionStorage.userCarrito, JSON.stringify(carrito))
     }
 
 
@@ -163,68 +187,21 @@ const global = async () => {
 //Que se hace en la ejecuccion: -------------------------------------------------
 
 global();
-// cargarEventosEnBotones()
 
-// export {eliminarDelCarrito};
-
+// Carrito de Usuario con Localstorage
 
 
 
+// REGISTRO DE USUARIO
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let main = function(){
-//     datosRegistro();
-// }
-
-// let datosRegistro = function(){
-//     document.querySelector("botonRegistro").setAttribute("onclick", "dataRead()");
+// function capturaDatosRegistro(){
+//     var nombreUsuario = document.getElementById("nombre").value;
+//     var apellidoUsuario = document.getElementById("apellido").value;
 // }
 
 
-// let dataRead = function(){
-//     console.log("Registrando datos del formulario");
-//     console.log(
-//         document.querySelector("#nombre").value,
-//         document.querySelector("#apellido").value,
-//         document.querySelector("#email").value,
-//         document.querySelector("#pass").value,
-//     );
 
-//     let usuarioCreado = {
-//         nombre : document.querySelector("#nombre").value,
-//         apellido : document.querySelector("#apellido").value,
-//         email : document.querySelector("#email").value,
-//         password : document.querySelector("#pass").value,
-//     };
 
-//     console.log(usuarioCreado);
-//     //JSON (paso objeto(usuarioCreado) a string)
-//     console.log(JSON.stringify(usuarioCreado));
-//     //Guardo datos del form en Localstorage
-//     save_localStorage(usuarioCreado);
-// }
 
-// let save_localStorage= function(usuarioOk){
-//     localStorage.setItem("datosCargados", JSON.stringify(usuarioOk));
-// }
-// let read_localStorage = function(){
-//     let usuarioOk = localStorage.getItem("datosCargados");
-//     console.log(datosCargados);
-//     let usuarioCreado = JSON.parse(datosCargados);
-//     console.log(usuarioCreado);
 
-// }
 

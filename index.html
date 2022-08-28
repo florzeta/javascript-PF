@@ -32,16 +32,16 @@
                         <a class="active" href="#home">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Info</a>
+                        <a href="#info">Info</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Destacados</a>
+                        <a href="#destacados">Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Descuentos</a>
+                        <a href="#descuentos">Descuentos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Tienda</a>
+                        <a href="#products-cards">Tienda</a>
                     </li>
                 </ul>
             </nav>
@@ -58,7 +58,8 @@
                         <i class="fa-solid fa-user open-modal"></i>
                     </li>
                     <li>
-                        <i class="fas fa-shopping-cart open-carrito"></i>
+                        <button id="boton-carrito"><i class="fas fa-shopping-cart open-carrito"></i><span id="contadorCarrito" class="contador-carrito"> 0 </span></button>
+                        
                     </li>
                 </ul>
             </div>
@@ -67,7 +68,7 @@
 
         <main>
             <section class="modal modal-show">
-                <div class="modal_container">
+                <div class="modal_container loginRegister">
                     <form id="datosRegistro">
                         <i class="fa-solid fa-xmark modal_close" id="close"></i>
                         <h1>Registrate para ingresar...</h1>
@@ -80,7 +81,7 @@
                             <input type="password" id="pass" placeholder="Password" class="password" />
                         </div>
                         <div class="completo">
-                            <input type="button" class="botonRegistro text-align-center" value="Enviar" />
+                            <input type="button" onclick="capturaDatosRegistro()" class="btnEnviar text-align-center " value="Enviar" />
                         </div>
                     </form>
                 </div>
@@ -140,8 +141,8 @@
                 </div>
             </section>
 
-            <section>
-                <div class="section-three">
+            <section class="section-three">
+                <div class="section-three" id="info">
                     <div class="row border-left">
                         <img src="iconos/package.png" alt="puntos pickup">
                         <h2>PUNTOS PICK UP</h2>
@@ -164,7 +165,7 @@
                     </div>
                 </div>
             </section>
-            <section class="nuestrosDestacados">
+            <section class="nuestrosDestacados" id="destacados">
                 <h3 class="heading"> Nuestros <span>destacados</span></h3>
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
@@ -202,7 +203,7 @@
 
                 </div>
             </section>
-            <section class="row">
+            <section class="seccion-descuentos" id="descuentos">
 
                 <div id="carouselExampleSlidesOnly" class="carousel slide col-6" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -234,8 +235,6 @@
 
                     </div>
                 </div>
-
-
             </section>
             <h1 class="heading">Nuestros <span>productos</span></h1>
             <section class="products-container" id="products-cards">
@@ -257,12 +256,15 @@
                         
 
                     </div> 
-                    <p class="text-right" id="precioTotal">Total: $ <span id="precioTotal">0</span></p>
-                        <button id="vaciarCarrito" class="btn btn-danger boton-agregar"><p>Vaciar</p></button>
-                        
+                    
+                    <p class="text-right">Total: $<span id="precioTotal"> 0</span></p>
+                    <div class="botones-carrito">
+                        <button id="vaciarCarrito" class="btn btn-danger boton-agregar m-3">Vaciar</button>
+                        <button href="#" id="procesar-pedido" class="btn btn-danger btn-block boton-agregar m-3">realizar compra</button>
+                        </div>
                 </div>
             </div>
-
+ 
             
             <!--<section class="main-form">
                 <div>
