@@ -25,19 +25,14 @@ class Producto {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('carrito')){
+    if (localStorage.getItem('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
         imprimirCarrito()
     }
 })
 
 
-const vaciarCarrito = document.getElementById('vaciarCarrito')
-//boton vaciar carrito
-vaciarCarrito.addEventListener('click', () => {
-    carrito.length = 0
-    imprimirCarrito()
-})
+
 
 const cargarProductos = async () => {
     let listaProductos = [];
@@ -75,7 +70,7 @@ const imprimirProductos = async (listaP) => {
                 </div>
                         <div class="price"> $ ${producto.precio}</div>
                         <div class="descripcion">
-                            <p>${producto.descr}</p>
+                            <p>${producto.descrip}</p>
                         </div>
                             
                         <button id="agregar${producto.id}" class="boton-agregar modal-carrito-show">Agregar <i class="fas fa-shopping-cart open-carrito"></i></button>
@@ -113,16 +108,18 @@ const agregarAlCarrito = (prodId) => {
         }
         carrito.push(item);// se carga al carrito
         Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Se agrego el producto al carrito',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+            position: 'top-end',
+            icon: 'success',
+            title: 'Se agrego el producto al carrito',
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
-    
+
+
     imprimirCarrito(); //actualiza el carrito
     console.log(carrito);
+
 }
 
 const eliminarDelCarrito = (prodId) => {
@@ -131,15 +128,15 @@ const eliminarDelCarrito = (prodId) => {
     const indice = carrito.indexOf(item) //Busca el elemento y da el indice
 
     carrito.splice(indice, 1) //a traves del indice se elimina el elemento
-    imprimirCarrito() 
+    imprimirCarrito()
     console.log(carrito)
-    
+
 }
 //chequeo de carrito de usuario
-function checkUserCarrito (){
+function checkUserCarrito() {
     const userCarrito = (sessionStorage.getItem(`userCarrito`));
     let carritotemp = JSON.parse(localStorage.getItem(userCarrito))
-    if (carritotemp){
+    if (carritotemp) {
         carrito.push(...carritotemp)
     }
     console.log(carrito);
@@ -150,28 +147,72 @@ function checkUserCarrito (){
 const imprimirCarrito = () => {
     // carrito en modal
     contenedorCarrito.innerHTML = ""
-        carrito.forEach((producto) => {
-            const div = document.createElement('div')
-            div.className = ('productoEnCarrito')
-            div.innerHTML = `
+    carrito.forEach((producto) => {
+        const div = document.createElement('div')
+        div.className = ('productoEnCarrito')
+        div.innerHTML = `
               <p>${producto.nombre}</p>
               <p>Precio: $ ${producto.precio}</p>
               <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
               <button onclick="eliminarDelCarrito(${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
             `
-            contenedorCarrito.appendChild(div)
+        contenedorCarrito.appendChild(div)
 
-            localStorage.setItem('carrito', JSON.stringify(carrito))
+        localStorage.setItem('carrito', JSON.stringify(carrito))
+    })
+
+    //mod contador del carrito
+    contadorCarrito.innerText = carrito.length;
+    console.log(carrito)
+    //mod precioTotal
+    precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
+    //se almacena el carrito y se usa como clave el correo del usuario para recuperar los prod seleccionados
+    localStorage.setItem(sessionStorage.userCarrito, JSON.stringify(carrito))
+}
+
+
+
+const vaciarCarrito = document.getElementById('vaciarCarrito')
+//boton vaciar carrito
+vaciarCarrito.addEventListener('click', () => {
+    carrito.length = 0
+    imprimirCarrito()
+    Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: `vaciaste tu carrito`,
+        showConfirmButton: false,
+        timer: 1500
+    })
+})
+
+
+//funcion simul. de pago en boton realizar compra
+const realizarCompra = document.getElementById("procesar-pedido");
+realizarCompra.addEventListener("click", e => pagar());
+
+const pagar = () => {
+    if (carrito.length !== 0) {
+        vaciarCarrito.click()
+Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: `Ya recibimos tu pedido!
+    Acércate a una de nuestras sucursales`,
+    showConfirmButton: false,
+    timer: 1500
+})
+    } else {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: `No hay nada agregado en tu carrito`,
+            showConfirmButton: false,
+            timer: 1500
         })
-        
-        //mod contador del carrito
-        contadorCarrito.innerText = carrito.length;
-        console.log(carrito)
-        //mod precioTotal
-        precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
-        //se almacena el carrito y se usa como clave el correo del usuario para recuperar los prod seleccionados
-        localStorage.setItem(sessionStorage.userCarrito, JSON.stringify(carrito))
     }
+
+}
 
 
 
@@ -188,16 +229,11 @@ const global = async () => {
 
 global();
 
-// Carrito de Usuario con Localstorage
 
 
 
-// REGISTRO DE USUARIO
 
-// function capturaDatosRegistro(){
-//     var nombreUsuario = document.getElementById("nombre").value;
-//     var apellidoUsuario = document.getElementById("apellido").value;
-// }
+
 
 
 
