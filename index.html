@@ -10,7 +10,8 @@
     <!--Librerias-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
@@ -24,35 +25,41 @@
 <body>
     <div class="container">
         <header>
-            <a href="#" class="logo m-3">
-                <img src="iconos/logo-proyecto-tienda.nb.png" alt="logo de la tienda" width="150" height="150">
+            <a href="#" class=" navbar-brand logo m-3">
+                <img src="iconos/logo-proyecto-tienda.nb.png" alt="logo de la tienda" width="130" height="130">
             </a>
             <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
-            <nav class="navbar">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="active" href="#home">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#info">Info</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#destacados">Destacados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#descuentos">Descuentos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#products-cards">Tienda</a>
-                    </li>
-                </ul>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid flex-nowrap">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="navbar-toggler-icon"></i>
+                    </button>
+                    <div class="collapse navbar-collapse row justify-content-evenly" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="active" href="#home">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#info">Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#destacados">Destacados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#descuentos">Ofertas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#products-cards">Tienda</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>     
             </nav>
 
             <div class="icons navbar">
                 <ul class="nav justify-content-end">
-                    <li>
-                        <i class="fa fa-bars" aria-hidden="true" href="#"></i>
-                    </li>
+
                     <li>
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </li>
@@ -66,13 +73,15 @@
                     </li>
                 </ul>
             </div>
-
         </header>
 
         <main>
             <section class="modal modal-show">
+
                 <!-- Formularios -->
                 <div class="contenedor-formularios modal_container">
+                    <div id="alert"></div>
+                    <div id="alertIntentos"></div>
                     <i class="fa-solid fa-xmark modal_close" id="closeRegistro"></i>
                     <!-- Links de los formularios -->
                     <ul class="contenedor-tabs">
@@ -85,22 +94,22 @@
                         <!-- Iniciar Sesion -->
                         <div id="iniciar-sesion">
                             <h1>Iniciar Sesión</h1>
-                            <form action="#" method="post">
+                            <form name=form action="#" method="post">
                                 <div class="contenedor-input">
                                     <label>
                                         Usuario <span class="req">*</span>
                                     </label>
-                                    <input type="text" required placeholder="usuario">
+                                    <input type="text" id="userName" required placeholder="usuario">
                                 </div>
 
                                 <div class="contenedor-input">
                                     <label>
                                         Contraseña <span class="req">*</span>
                                     </label>
-                                    <input type="password" placeholder="contraseña" required>
+                                    <input type="password" id="password" placeholder="contraseña" required>
                                 </div>
-                                <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p>
-                                <input type="submit" class="button button-block" value="Iniciar Sesión">
+                                <!-- <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p> -->
+                                <input type="submit" id="botonLogin" class="button button-block" value="Iniciar Sesión">
                             </form>
                         </div>
 
@@ -127,31 +136,34 @@
                                     <label>
                                         Usuario <span class="req">*</span>
                                     </label>
-                                    <input type="text" required placeholder="usuario">
+                                    <input type="text" id="nuevoUsuario" required placeholder="usuario">
                                 </div>
                                 <div class="contenedor-input">
                                     <label>
                                         Email <span class="req">*</span>
                                     </label>
-                                    <input type="email" required placeholder="email">
+                                    <input type="email" id="correoElectronico" required placeholder="email">
                                 </div>
                                 <div class="contenedor-input">
                                     <label>
                                         Contraseña <span class="req">*</span>
                                     </label>
-                                    <input type="password" required placeholder="contraseña">
+                                    <input type="password" id="nuevaContraseña" required placeholder="contraseña">
                                 </div>
 
                                 <div class="contenedor-input">
                                     <label>
                                         Repetir Contraseña <span class="req">*</span>
                                     </label>
-                                    <input type="password" required placeholder="repetir contraseña">
+                                    <input type="password" id="repContraseña" required placeholder="repetir contraseña">
                                 </div>
 
                                 <input type="submit" class="button button-block" id="btnRegistro" value="Registrarse">
+
                             </form>
+
                         </div>
+
                     </div>
                 </div>
 
@@ -167,6 +179,7 @@
                                 style="background: url('https://i.ibb.co/b5VkxT3/Dise-o-sin-t-tulo-3.png') no-repeat">
                                 <div class="row">
                                     <h1>Hola!</h1>
+                                    <p><span class=""></span></p>
                                     <p>Entrega proyecto final Javascript</p>
                                 </div>
 
@@ -244,17 +257,20 @@
                                 alt="Utensillos ecologicos">
                             <div class="card-body">
                                 <h2 class="card-title">Utensillos ecologicos</h2>
-                                <p class="card-text text-align-center">El bambú cada vez está más presente en nuestras cocinas como material ecológico con el que se elaboran algunos utensilios</p>
+                                <p class="card-text text-align-center">El bambú cada vez está más presente en nuestras
+                                    cocinas como material ecológico con el que se elaboran algunos utensilios</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 my-1 d-flex justify-content-center ">
-                        <div class="card" >
+                        <div class="card">
                             <img src="https://i.ibb.co/vqWPTcz/pexels-sand-atkinson-4192776.jpg" class="card-img-top"
                                 alt="Decoracion de interior">
                             <div class="card-body">
                                 <h2 class="card-title">Decoracion de interior</h2>
-                                <p class="card-text text-align-center"> La decoración puede transformar tu casa. Descubre todas las ideas y trucos de decoración. Aprende cómo decorar casas, salones, dormitorios o pasillos.</p>
+                                <p class="card-text text-align-center"> La decoración puede transformar tu casa.
+                                    Descubre todas las ideas y trucos de decoración. Aprende cómo decorar casas,
+                                    salones, dormitorios o pasillos.</p>
                             </div>
                         </div>
                     </div>
@@ -264,7 +280,8 @@
                                 alt="Tazas y tazones de ceramica">
                             <div class="card-body">
                                 <h2 class="card-title">Tazas y tazones de ceramica</h2>
-                                <p class="card-text text-align-center">CERÁMICA ARTESANAL Con materias primas naturales y manos talentosas creamos la vajilla de los suspiros. ♡</p>
+                                <p class="card-text text-align-center">CERÁMICA ARTESANAL Con materias primas naturales
+                                    y manos talentosas creamos la vajilla de los suspiros. ♡</p>
                             </div>
                         </div>
                     </div>
@@ -279,33 +296,40 @@
                         <div class="carousel-item active">
                             <img src="https://i.ibb.co/Z1BZM4X/pexels-designecologist-1248583.jpg" class="d-block w-100"
                                 alt="First slide">
-                                <div id="textoDesc">
-                                    <h3>SALE</h3>
-                                    <p>Almohadones</p>
-                                </div>
+                            <div id="textoDesc">
+                                <h3>SALE</h3>
+                                <p>Almohadones</p>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <img src="https://i.ibb.co/Y7Qq8M7/pexels-designecologist-1239298.jpg" class="d-block w-100"
                                 alt="Second slide">
-                                
+                                <div id="textoDesc">
+                                    <h3>Promo 2x1</h3>
+                                    <p>Fundas</p>
+                                </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
                 <div id="carouselExampleSlidesOnly" class="carousel slide col-5" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://i.ibb.co/gv6r5mL/pexels-cottonbro-6739696-1.jpg" class="d-block w-100 img-card"
-                                alt="First Slide">
-                                <div id="textoDesc">
-                            <h3>20%Off</h3>
-                            <p>DECORACION</p>
-                        </div>
+                            <img src="https://i.ibb.co/gv6r5mL/pexels-cottonbro-6739696-1.jpg"
+                                class="d-block w-100 img-card" alt="First Slide">
+                            <div id="textoDesc">
+                                <h3>20%Off</h3>
+                                <p>DECORACION</p>
+                            </div>
                         </div>
                         <div class="carousel-item">
                             <img src="https://i.ibb.co/CBHV9W1/pexels-cottonbro-6739698-1.jpg" class="d-block w-100"
                                 alt="Second Slide">
+                                <div id="textoDesc">
+                                    <h3>OFERTAS</h3>
+                                    <p>DECO ceramica</p>
+                                </div>
                         </div>
 
                     </div>
@@ -411,6 +435,11 @@
             <p>Pagina web creada por <strong> Florencia Ayelen Zayas Furnari </strong></p>
         </div>
     </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

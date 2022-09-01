@@ -70,7 +70,7 @@ const imprimirProductos = async (listaP) => {
                 </div>
                         <div class="price"> $ ${producto.precio}</div>
                         <div class="descripcion">
-                            <p>${producto.descrip}</p>
+                            <p>${producto.descripcion}</p>
                         </div>
                             
                         <button id="agregar${producto.id}" class="boton-agregar modal-carrito-show">Agregar <i class="fas fa-shopping-cart open-carrito"></i></button>

@@ -168,7 +168,7 @@ $(document).ready(function () {
             showAlert("success", "Bienvenido " + userlog, mostaralerta);
             intento = 1;
 
-            setTimeout(closeModal(), 3000);
+            setTimeout(Swal.fire('Inicio de sesion exitoso!!'), 3000);
         } else {
             showAlert("warning", "Numero de intentos: " + intento, document.getElementById("alertIntentos"));
             showAlert("warning", "<b>El usuario y contraseña ingresados son incorrectos</b>", mostaralerta);
