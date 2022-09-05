@@ -130,7 +130,7 @@ $(document).ready(function () {
             showAlert("warning", "Las contraseñas ingresadas no coinciden", mostaralerta);
         }
         if (validarPasswordlongitud(password)) {
-            showAlert("warning", "La contraseña no llega cumplir con los requisitos", mostaralerta);
+            showAlert("warning", "La contraseña tiene que tener mas de 3 digitos", mostaralerta);
         }
         if (Boolean(!validarEmail(email))) {
             showAlert("warning", "El email no cumple los requisitos o ya está registrado", mostaralerta);
