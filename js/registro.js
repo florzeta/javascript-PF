@@ -59,7 +59,7 @@ $(document).ready(function () {
         }
     }
 
-    /* Validamos la longitud de la contraseña y la convertimos en minusculas */
+    /* Validacion longitud de la contraseña y pasa a minusculas */
     function validarPasswordlongitud(password) {
         password = password.toLowerCase();
         if (password.length <= 3) {
