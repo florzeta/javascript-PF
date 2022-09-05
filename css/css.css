@@ -626,6 +626,7 @@ p {
     font-weight: 300;
 }
 .card .descripcion p{
+    height: 50px;
     margin: 2rem 0;
     font-size: 18px;
     font-weight: 100;
